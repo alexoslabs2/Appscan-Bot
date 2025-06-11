@@ -29,7 +29,7 @@ Slack -> Flask App (Python) -> OWASP ZAP API
   * Java Runtime (OpenJDK 17+)
 * Tools:
 
-  * [OWASP ZAP v2.15.0](https://github.com/zaproxy/zaproxy/releases/tag/v2.15.0)
+  * [OWASP ZAP v2.16.1](https://github.com/zaproxy/zaproxy/releases/tag/v2.16.1)
   * Slack Bot User OAuth Token
 * Dependencies:
 
