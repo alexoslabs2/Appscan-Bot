@@ -28,7 +28,7 @@ Slack -> Flask App (Python) -> OWASP ZAP API
     
 * Tools:
 
-  * [OWASP ZAP v2.16.1](https://github.com/zaproxy/zaproxy/releases/tag/v2.16.1)
+  * [OWASP ZAP](https://github.com/zaproxy/zaproxy/releases/download/v2.16.1/ZAP_2_16_1_unix.sh)
   * Slack Bot User OAuth Token
 
 * Dependencies:
@@ -46,8 +46,8 @@ Slack -> Flask App (Python) -> OWASP ZAP API
 ```bash
 sudo apt install openjdk-17-jre
 pip install slack_sdk flask requests --break-system-packages
-wget https://github.com/zaproxy/zaproxy/releases/download/v2.15.0/ZAP_2_15_0_unix.sh
-sudo bash ZAP_2_15_0_unix.sh
+wget https://github.com/zaproxy/zaproxy/releases/download/v2.16.1/ZAP_2_16_1_unix.sh
+sudo bash ZAP_2_16_1_unix.sh
 ```
 
 ### 2. Configure Slack Bot
