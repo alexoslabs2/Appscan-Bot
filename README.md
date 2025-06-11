@@ -24,13 +24,13 @@ Slack -> Flask App (Python) -> OWASP ZAP API
 * Host with:
 
   * Python 3.11+
-  * Internet-accessible IP or DNS
-  * TCP Port 3000 open
   * Java Runtime (OpenJDK 17+)
+    
 * Tools:
 
   * [OWASP ZAP v2.16.1](https://github.com/zaproxy/zaproxy/releases/tag/v2.16.1)
   * Slack Bot User OAuth Token
+
 * Dependencies:
 
   * `slack_sdk`
