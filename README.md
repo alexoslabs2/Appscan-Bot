@@ -1,4 +1,4 @@
-# AppScanBot
+# AppScan Bot
 
 ## Overview
 
