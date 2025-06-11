@@ -1,74 +1,91 @@
-# Appscan Bot
+# AppScanBot
 
-AppScanBot was developed with the objective of discovering vulnerabilities in web applications exposed to the internet, in an easy and scalable manner.
+## Overview
 
-The application was designed for use on Slack.
+AppScanBot is a Slack-integrated automation solution designed to identify security vulnerabilities in web applications exposed to the internet using OWASP ZAP
 
-### Requirements
+---
 
-* OWASP ZAP
+## Architecture Summary
 
-Download OWASP Zap - https://github.com/zaproxy/zaproxy/releases/download/v2.16.1/ZAP_2_16_1_unix.sh
+* **Slack Integration**: Enables triggering scans and receiving reports via Slack messages.
+* **Python API Server**: Listens for Slack events, parses commands, and orchestrates scans.
+* **OWASP ZAP**: Performs spidering and vulnerability scanning.
+* **HTML Report Delivery**: Generates and uploads ZAP scan reports to Slack channels.
 
-$ sudo apt install openjdk-17-jre
+```
+Slack -> Flask App (Python) -> OWASP ZAP API
+```
 
-$ pip install slack_sdk flask requests --break-system-packages  # For Debian 12
+---
 
-$ wget https://github.com/zaproxy/zaproxy/releases/download/v2.16.1/ZAP_2_16_1_unix.sh
+## System Requirements
 
-$ sudo bash ZAP_2_16_1_unix.sh
+* Host with:
 
+  * Python 3.11+
+  * Internet-accessible IP or DNS
+  * TCP Port 3000 open
+  * Java Runtime (OpenJDK 17+)
+* Tools:
 
-Start OWASP ZAP
+  * [OWASP ZAP v2.15.0](https://github.com/zaproxy/zaproxy/releases/tag/v2.15.0)
+  * Slack Bot User OAuth Token
+* Dependencies:
 
-zap.sh -daemon -config api.key=<API_KEY>
+  * `slack_sdk`
+  * `flask`
+  * `requests`
 
-Example:
-zap.sh -daemon -config api.key=5e9fcd63-407a-4f6c-9b18-310ac44b3779
+---
 
-* Configure Slack
-  
-Access Your Apps
+## Installation Steps
 
-Click on Create New App → From scratch
+### 1. Install Dependencies
 
-Enter the app name and select your workspace
+```bash
+sudo apt install openjdk-17-jre
+pip install slack_sdk flask requests --break-system-packages
+wget https://github.com/zaproxy/zaproxy/releases/download/v2.15.0/ZAP_2_15_0_unix.sh
+sudo bash ZAP_2_15_0_unix.sh
+```
 
-Click Create App
+### 2. Configure Slack Bot
 
-Go to OAuth & Permissions and add the following scopes:
+* Go to: [https://api.slack.com/apps](https://api.slack.com/apps)
+* Create a new App → From Scratch
+* Add OAuth scopes:
 
-chat:write
+  * `chat:write`
+  * `commands`
+* Install to Workspace and copy the **Bot User OAuth Token**
 
-commands
+### 3. Start OWASP ZAP
 
-Install the app in your workspace under the OAuth Tokens section
+```bash
+zap.sh -daemon -config api.key=<YOUR_API_KEY>
+```
 
-Copy the Bot User OAuth Token and insert it into the integration script
+### 4. Update Python Script
 
-* Configure the Integration Script
+* Insert your **Slack Token** and **ZAP API Key** into the integration script
+* Ensure ZAP is running at the defined API URL (default: [http://localhost:8080](http://localhost:8080))
 
-Edit the script to insert:
+---
 
-Your Slack Bot Token
+## Usage
 
-Your OWASP ZAP API Key
+### Slack Commands
 
-Execute the script:
+Send a message in Slack:
 
-python3 your_script_name.py
+```
+@bot scan http://yourtarget.com
+```
 
-Configure Event Subscriptions
+## Recommendations for Production
 
-In your Slack App settings:
-
-Go to Event Subscriptions
-
-Enable events and set the URL where your integration script is hosted
-
-* Final Steps
-
-Add the bot to the desired Slack channel
-
-Run a scan using the command:
-@bot scan http://example.com
+* Harden OWASP ZAP host (TLS, auth headers, firewall rules)
+* Store API keys securely (use dotenv or secret managers)
+* Set webhook URL under Slack > Event Subscriptions
+* Monitor and rate-limit Slack bot traffic to avoid abuse
