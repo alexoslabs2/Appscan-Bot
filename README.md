@@ -24,6 +24,7 @@ Slack -> Flask App (Python) -> OWASP ZAP API
 * Host with:
 
   * Python 3.11+
+  * Expose 3000/tcp port
   * Java Runtime (OpenJDK 17+)
     
 * Tools:
