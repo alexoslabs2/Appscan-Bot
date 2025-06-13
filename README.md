@@ -56,10 +56,14 @@ sudo bash ZAP_2_16_1_unix.sh
 * Go to: [https://api.slack.com/apps](https://api.slack.com/apps)
 * Create a new App → From Scratch
 * Add OAuth scopes:
-
   * `chat:write`
   * `commands`
+
 * Install to Workspace and copy the **Bot User OAuth Token**
+
+### 4. Update Python Script
+
+* Insert your **Slack Token** and **ZAP API Key** into the integration script
 
 ### 3. Start OWASP ZAP
 
@@ -67,11 +71,23 @@ sudo bash ZAP_2_16_1_unix.sh
 zap.sh -daemon -config api.key=<YOUR_API_KEY>
 ```
 
-### 4. Update Python Script
+### 4. Start Python Scrypt
 
-* Insert your **Slack Token** and **ZAP API Key** into the integration script
-* Ensure ZAP is running at the defined API URL (default: [http://localhost:8080](http://localhost:8080))
+```python3 appscan.py```
 
+### 5. Set webhook URL under Slack 
+
+* Go to: [https://api.slack.com/apps](https://api.slack.com/apps)
+* Access de App created
+* Click Event Subscriptions
+* Enable Events
+* Inform the Request URL
+  * ```http://<IP or Domain>:3000/slack/events```
+* Add Subscribe to bot events
+  * `app_mention'
+* Save Configuration
+* Reinstall App
+  
 ---
 
 ## Usage
@@ -84,9 +100,12 @@ Send a message in Slack:
 @bot scan http://yourtarget.com
 ```
 
+## Demo
+
+![alt-text](https://gifyu.com/image/bxOSA)
+
 ## Recommendations for Production
 
 * Harden OWASP ZAP host (TLS, auth headers, firewall rules)
 * Store API keys securely (use dotenv or secret managers)
-* Set webhook URL under Slack > Event Subscriptions
 * Monitor and rate-limit Slack bot traffic to avoid abuse
