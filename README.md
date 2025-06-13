@@ -102,7 +102,7 @@ Send a message in Slack:
 
 ## Demo
 
-![alt-text](https://gifyu.com/image/bxOSA)
+![alt-text](https://github.com/alexoslabs2/Appscan-Bot/blob/main/demo/appscan.gif)
 
 ## Recommendations for Production
 
